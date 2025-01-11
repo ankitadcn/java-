@@ -1,26 +1,38 @@
-import java.util.*;
+public class Demo {
 
-class Demo {
-  public static void main(String[] args) {
-    int count = 0;
-    int arr[] = { 6, 1, 2, 5, 7, 3 };
-    int i = 0;
-    while (i < arr.length - 1) {
-      int j = 0;
-      while (j < arr.length - i - 1) {
-        if (arr[j] > arr[j + 1]) {
-          int temp = arr[j];
-          arr[j] = arr[j + 1];
-          arr[j + 1] = temp;
-        }
+  public static int binarySearch(int[] arr, int target) {
+    int left = 0;
+    int right = arr.length - 1;
 
-        j = j + 1;
-        System.out.println(Arrays.toString(arr));
-        count++;
+    while (left <= right) {
+      int mid = left + (right - left) / 2; // Calculate mid index
+
+      if (arr[mid] == target) {
+        return mid;
       }
-      System.out.println();
-      i = i + 1;
+
+      if (arr[mid] > target) {
+        right = mid - 1;
+      }
+
+      else {
+        left = mid + 1;
+      }
     }
-    System.out.println(count);
+
+    return -1;
+  }
+
+  public static void main(String[] args) {
+
+    int[] arr = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+    int target = 7;
+
+    int result = binarySearch(arr, target);
+    if (result == -1) {
+      System.out.println("Element not found in the array.");
+    } else {
+      System.out.println("Element found at index: " + result);
+    }
   }
 }
